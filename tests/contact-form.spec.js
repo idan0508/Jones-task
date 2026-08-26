@@ -4,11 +4,11 @@ test('Jones Contact Form Automation', async ({ page }) => {
     await page.goto('https://test.netlify.app/');
 
     //  Fill out the contact form fields
-    await page.getByRole('textbox', { name: 'Name *' }).fill('Idan Dahan');
-    await page.getByRole('textbox', { name: 'Email *' }).fill('Idan@gmail.com');
+    await page.getByRole('textbox', { name: 'Name *' }).fill('Idan Dahan Test');
+    await page.getByRole('textbox', { name: 'Email *' }).fill('idan.dahan@example.com');
     await page.getByRole('textbox', { name: 'Phone *' }).fill('050-1234567');
-    await page.getByRole('textbox', { name: 'Company' }).fill('Ruppin');
-    await page.getByRole('textbox', { name: 'Website' }).fill('https://www.linkedin.com/in/idan-dahan-364b80274/');
+    await page.getByRole('textbox', { name: 'Company' }).fill('Jones Automation Test');
+    await page.getByRole('textbox', { name: 'Website' }).fill('https://example.com');
 
     // Select the number of employees (Bonus requirement)
     await page.getByLabel('Number of Employees').selectOption('51-500');
@@ -18,7 +18,7 @@ test('Jones Contact Form Automation', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Request a call back' }).click();
 
-    // Wait for the Thank You page to load, then log success
-    await page.waitForLoadState('networkidle');
+    // Verify that the Thank You page was reached
+    await expect(page).toHaveURL(/thank-you\.html/);
     console.log('Form submitted successfully and reached the Thank You page!');
 });
